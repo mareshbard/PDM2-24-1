@@ -1,6 +1,7 @@
 # RESULTADOS DO CÓDIGO:
 
-![image](https://github.com/mareshbard/PDM2-24-1/assets/125154278/899d5022-b073-4ac1-a3a5-f67c0d1be288)
+![image](https://github.com/mareshbard/PDM2-24-1/assets/125154278/d3a7ed39-f57b-44d1-9937-9e44648753eb)
+
 ## Feito em dupla com Antônio Abner
 
 # CÓDIGO:
@@ -10,10 +11,6 @@ import 'dart:async';
 import 'dart:isolate';
 
 void main() async {
-    print('Antonio Abner Soares Jeronimo');
-    print('Leticia Vitória Pereira Gomes');
-    
-
   final receivePort = ReceivePort();
   await Isolate.spawn(doAsyncOperation, receivePort.sendPort);
 
@@ -26,8 +23,11 @@ void main() async {
 }
 
 void doAsyncOperation(SendPort sendPort) async {
+
   final result = await File('./16-programacao-assincrona/arquivo.txt').readAsString();
   sendPort.send(result);
+}
+
 }
 ~~~
 # LAUNCH JSON:
