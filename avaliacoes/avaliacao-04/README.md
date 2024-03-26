@@ -31,15 +31,13 @@ class Aluno {
   String toString() {
     return 'Aluno{id: $id, nome: $nome, dataNascimento: $dataNascimento}';
   }
-
 }
 
 class AlunoDatabase {
   static final AlunoDatabase instance = AlunoDatabase._init();
   static Database? _database;
-  
+
   AlunoDatabase._init();
-  
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -47,7 +45,6 @@ class AlunoDatabase {
     _database = await _initDB('aluno.db');
     return _database!;
   }
-
 
   Future<Database> _initDB(String dbName) async {
     final dbPath = await getDatabasesPath();
@@ -89,36 +86,35 @@ class AlunoDatabase {
 
     final Map<String, dynamic> alunoMap = maps.first;
 
-   if (alunoMap.containsKey('id') &&
-      alunoMap.containsKey('nome') &&
-      alunoMap.containsKey('data_nascimento')) {
-    return Aluno(
-      id: alunoMap['id'] as int,
-      nome: alunoMap['nome'] as String,
-      dataNascimento: alunoMap['data_nascimento'] as String,
-    );
-  } else {
-    return Aluno(id: -1, nome: '', dataNascimento: '');
+    if (alunoMap.containsKey('id') &&
+        alunoMap.containsKey('nome') &&
+        alunoMap.containsKey('data_nascimento')) {
+      return Aluno(
+        id: alunoMap['id'] as int,
+        nome: alunoMap['nome'] as String,
+        dataNascimento: alunoMap['data_nascimento'] as String,
+      );
+    } else {
+      return Aluno(id: -1, nome: '', dataNascimento: '');
+    }
   }
-}
 
   Future<List<Aluno>> getAllAlunos() async {
     final db = await database;
     final maps = await db.query('TB_ALUNOS');
 
     return List.generate(maps.length, (i) {
-      
-        final int id = maps[i]['id'] as int;
-        final String nome = maps[i]['nome'] as String;
-        final String dataNascimento = maps[i]['data_nascimento'] as String;
-      
-       return Aluno(
-      id: id,
-      nome: nome,
-      dataNascimento: dataNascimento,
-    );
-    });   
-     }
+      final int id = maps[i]['id'] as int;
+      final String nome = maps[i]['nome'] as String;
+      final String dataNascimento = maps[i]['data_nascimento'] as String;
+
+      return Aluno(
+        id: id,
+        nome: nome,
+        dataNascimento: dataNascimento,
+      );
+    });
+  }
 
   Future<int> updateAluno(Aluno aluno) async {
     final db = await database;
@@ -141,17 +137,15 @@ class AlunoDatabase {
 }
 
 void main() async {
-
   sqfliteFfiInit();
   databaseFactory = databaseFactoryFfi;
-  
+
   // Inicializar o banco de dados
   final db = AlunoDatabase.instance;
 
   // Inserir um aluno
-  final aluno = Aluno(nome: ' Abner  ', dataNascimento: '2005-05-19');
+  final aluno = Aluno(nome: 'Abner', dataNascimento: '2005-05-19');
   final aluno2 = Aluno(nome: 'Leticia', dataNascimento: '2006-05-19');
-
 
   int alunoId = await db.insertAluno(aluno);
   int alunoId2 = await db.insertAluno(aluno2);
@@ -166,7 +160,7 @@ void main() async {
   print('Aluno recuperado: $retrievedAluno');
 
   // Atualizar os dados de um aluno
-  retrievedAluno.nome ='?';
+  retrievedAluno.nome = '?';
   await db.updateAluno(retrievedAluno);
 
   // Buscar todos os alunos
@@ -176,4 +170,5 @@ void main() async {
   // Deletar um aluno
   await db.deleteAluno(alunoId);
 }
+
 ~~~
