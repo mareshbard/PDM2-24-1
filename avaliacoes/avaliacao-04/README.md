@@ -6,6 +6,8 @@
 ![Imagem do WhatsApp de 2024-03-25 à(s) 16 44 12_54c91892](https://github.com/mareshbard/PDM2-24-1/assets/125154278/91367b07-21b8-41af-b011-9a1c26f37c9b)
 
 # CÓDIGO
+
+~~~
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -174,3 +176,4 @@ void main() async {
   // Deletar um aluno
   await db.deleteAluno(alunoId);
 }
+~~~
