@@ -1,4 +1,4 @@
-## ATIVIDADE 05/09/24 - CÓDIGO EM ZIP ACIMA 
+## ATIVIDADE 05/09/24 - CÓDIGO ACIMA 
 
 ![image](https://github.com/user-attachments/assets/6e528ccb-b086-47b2-bf4b-0303d863dfcb)
 
